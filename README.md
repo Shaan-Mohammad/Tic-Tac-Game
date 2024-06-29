@@ -2,14 +2,11 @@ from IPython.display import clear_output
 
 def display_board(board):
     clear_output()
-    print(board[1]+'|', board[2]+'|' ,board[3])
-    print('-------------')
+    print(board[7]+'|', board[8]+'|' ,board[9])
+    print('--------')
     print(board[4]+'|', board[5]+'|', board[6])
-    print('-------------')
-    print(board[7]+'|',board[8]+ '|', board[9])
-  
-test_board = ['#','X','O','X','O','X','O','X','O','X']
-display_board(test_board)
+    print('--------')
+    print(board[1]+'|',board[2]+ '|', board[3])
 def player_input():
     mark=''
     # while mark != 'X' and mark != "O":
@@ -22,14 +19,14 @@ def player_input():
     #     player2='X'
     # return (player1,player2)
     while not (mark == 'X' or mark == 'O'):
-        mark = (input("Player1 : as 'X' or 'O' is ").upper())
+        mark = (input("Player1 Chooses'X' or 'O' is ").upper())
 
     if mark =='X':
         return ('X','O')
     else:
         return('O','X')
-
 player1_mark , player2_mark = player_input()
+
 def place_marker(board, mark, position):
         board[position]=mark
 def win_check(board, mark):
@@ -41,6 +38,7 @@ def win_check(board, mark):
             (board[9]== mark and board[6]== mark and board[3]== mark)or
             (board[9]== mark and board[5]== mark and board[1]== mark)or
             (board[7]== mark and board[5]== mark and board[3]== mark))
+
 import random
 
 def choose_first():
@@ -50,24 +48,32 @@ def choose_first():
         return 'Player 1'
     else :
         return 'Player 2'
+
+
 def space_check(board, position):
     
     return board[position] == ''
+    
 def full_board_check(board):
     for i in range (1,10):
         if space_check(board,i):
             return False
     return True
+
 def player_choice(board):
     position = 0
     while position not in [1,2,3,4,5,6,7,8,9] or not space_check(board,position):
         position = int(input("Choose a Position 1-9"))
 
     return position
+
 def replay():
-    choice= input("Do you want to play again? type Yes or NO")
+    choice = ''
+    while not(choice == 'YES' or choice == 'NO'):
+        choice= (input("Do you want to play again? type Yes or NO").upper())
     
-    return choice == 'Yes'
+    return choice == 'YES'
+
 print('Welcome to Tic Tac Toe!')
 
 while True:
@@ -76,10 +82,10 @@ while True:
     turn = choose_first()
     print(turn+ 'will go first')
 
-    play_game = input("Ready to play ? Y or N")
+    play_game = (input("Ready to play ? Y or N").upper())
     if play_game == 'Y':
         game_on = True
-    elif play_game == 'N':
+    else:
         game_on=False 
 
     while game_on:
@@ -115,16 +121,5 @@ while True:
                     turn= 'Player 1'
             
 
-                
-
-
-
     if not replay():
         break
-         
-        
-
-
-
-         
-
